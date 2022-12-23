@@ -1,30 +1,32 @@
-const paletasService = require('../services/paleta.service');
+const paletasService = require('../services/paleta.service.js');
+const mongose = require('mongoose');
+const { default: mongoose } = require('mongoose');
 
-const findAllPaletasController = (req, res) => {
-  const paletas = paletasService.findAllPaletasService();
+const findAllPaletasController = async (req, res) => {
+  const allPaletas = await paletasService.findAllPaletasService();
 
-  if (paletas.length == 0) {
+  if (allPaletas.length == 0) {
     return res.status(404).send({ message: 'Não existe nada cadastrado!' });
   }
 
-  res.send(paletas);
+  res.send(allPaletas);
 };
 
-const findByIdPaletaController = (req, res) => {
-  const parametroId = Number(req.params.id);
+const findByIdPaletaController = async (req, res) => {
+  const idParam = req.params.id;
 
-  if (!parametroId) {
+  if (!mongoose.Types.ObjectId.isValid(idParam)) {
     return res.status(404).send({ message: 'Id inválido!' });
   }
-  const escolhaPaleta = paletasService.findByIdPaletaService(parametroId);
+  const chosenPaleta = await paletasService.findByIdPaletaService(idParam);
 
-  if (!escolha) res.send(escolhaPaleta);
-  {
+  if (!chosenPaleta) {
     return res.status(404).send({ message: 'Paleta não encontrada!' });
   }
+  res.send(chosenPaleta);
 };
 
-const createPaletaController = (req, res) => {
+const createPaletaController = async (req, res) => {
   const paleta = req.body;
 
   if (!paleta.sabor || !paleta.descricao || !paleta.foto || !paleta.preco) {
@@ -33,48 +35,43 @@ const createPaletaController = (req, res) => {
       .send({ message: 'Preencha todos os campos para enviar!' });
   }
 
-  const newPaleta = paletasService.createPaletaService(paleta);
+  const newPaleta = await paletasService.createPaletaService(paleta);
   res.send(newPaleta);
 };
 
-const updatePaletaController = (req, res) => {
-  const idParam = Number(req.params.id);
+const updatePaletaController = async (req, res) => {
+  const idParam = req.params.id;
 
-  if (!idParam) {
+  if (!mongoose.Types.ObjectId.isValid(idParam)) {
     return res.status(404).send({ message: 'Id inválido!' });
   }
 
-  const paletaEdit = req.body;
+  const editPaleta = req.body;
 
   if (
-    !paletaEdit.sabor ||
-    !paletaEdit.descricao ||
-    !paletaEdit.foto ||
-    !paletaEdit.preco
+    !editPaleta.sabor ||
+    !editPaleta.descricao ||
+    !editPaleta.foto ||
+    !editPaleta.preco
   ) {
     return res
       .status(400)
       .send({ message: 'Preencha todos os campos para enviar!' });
   }
 
-  const updatePaleta = paletasService.updatePaletaService(idParam, paletaEdit);
+  const updatePaleta = await paletasService.updatePaletaService(idParam, paletaEdit);
   res.send(updatePaleta);
 };
 
-const deletePaletaController = (req, res) => {
-  const idParam = Number(req.params.id);
+const deletePaletaController = async (req, res) => {
+  const idParam = req.params.id;
 
-  if (!idParam) {
+  if (!mongoose.Types.ObjectId.isValid(idParam)) {
     return res.status(404).send({ message: 'Id inválido!' });
   }
 
-  const escolhaPaleta = paletasService.deletePaletaService(idParam);
+  await paletasService.deletePaletaService(idParam);
 
-  if (!escolhaPaleta) {
-    return res.status(404).send({ message: 'Paleta não encontrada!' });
-  }
-
-  paletasService.deletePaletaService(idParam);
   res.send({ message: 'Paleta deletada com sucesso!' });
 };
 
