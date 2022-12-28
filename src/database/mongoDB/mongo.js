@@ -2,15 +2,12 @@ const mongoose = require('mongoose');
 
 const connectToDatabase = () => {
   mongoose
-    .connect(
-      'mongodb+srv://root:Admin@api-elgeladon.e8wxutg.mongodb.net/?retryWrites=true&w=majority',
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      },
-    )
+    .connect(process.env.URI_DATABASE, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
     .then(() => {
-      console.log('Database Connected');
+      console.log('Database Connected in MongoDB Atlas');
     })
     .catch((err) => {
       console.log('Error in database: ', err);
