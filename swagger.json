@@ -46,35 +46,35 @@
       }
     },
     "/one-paleta/{id}": {
-"get": {
-    "summary": "Busca uma paleta pelo ID",
-    "description": "Rota responsável por buscar uma paleta pelo ID",
-    "tags": ["Paletas"],
-    "parameters": [
-        {
+      "get": {
+        "summary": "Busca uma paleta pelo ID",
+        "description": "Rota responsável por buscar uma paleta pelo ID",
+        "tags": ["Paletas"],
+        "parameters": [
+          {
             "name": "id",
             "in": "path",
             "description": "Id da paleta para a busca",
             "required": true
-        }
-    ],
-    "responses": {
-        "400": {
+          }
+        ],
+        "responses": {
+          "400": {
             "description": "Bad Request"
-        },
-        "200": {
+          },
+          "200": {
             "description": "ok",
             "content": {
-                "application/json": {
-                    "schema": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/Paletas"
-                    }
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Paletas"
                 }
+              }
             }
+          }
         }
-    }
-}
+      }
     },
     "/create-paleta": {
       "post": {
@@ -122,7 +122,7 @@
       "put": {
         "summary": "Editar uma paleta pelo ID",
         "description": "Rota responsável por editar uma paleta pelo ID",
-        "tags":["Paletas"],
+        "tags": ["Paletas"],
         "parameters": [
           {
             "name": "id",
@@ -135,7 +135,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref":"#/components/schemas/Paletas"
+                "$ref": "#/components/schemas/Paletas"
               },
               "examples": {
                 "Paletas": {
@@ -152,7 +152,7 @@
         },
         "responses": {
           "400": {
-            "description":"Bad Request"
+            "description": "Bad Request"
           },
           "200": {
             "description": "Ok",
@@ -160,7 +160,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref":"#/components/schemas/Paletas"
+                  "$ref": "#/components/schemas/Paletas"
                 }
               }
             }
@@ -265,20 +265,20 @@
       }
     },
     "/finish-carrinho": {
-        "delete": {
-          "summary": "Apagar todos os itens do carrinho",
-          "description": "Rota responsável por apagar todos os itens do carrinho",
-          "tags": ["Carrinho"],
-          "responses": {
-            "400": {
-              "description": "Bad Request"
-            },
-            "200": {
-              "description": "OK"
-            }
+      "delete": {
+        "summary": "Apagar todos os itens do carrinho",
+        "description": "Rota responsável por apagar todos os itens do carrinho",
+        "tags": ["Carrinho"],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK"
           }
         }
       }
+    }
   },
   "components": {
     "schemas": {

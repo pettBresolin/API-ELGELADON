@@ -2,10 +2,13 @@ const mongoose = require('mongoose');
 
 const connectToDatabase = () => {
   mongoose
-    .connect('mongodb://127.0.0.1:27017/paletas-db', {
+    .connect(
+      'mongodb+srv://root:Admin@api-elgeladon.e8wxutg.mongodb.net/?retryWrites=true&w=majority',
+      {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-    })
+      },
+    )
     .then(() => {
       console.log('Database Connected');
     })
