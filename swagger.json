@@ -15,8 +15,8 @@
       "description": "API de teste"
     },
     {
-      "url": "https://api-elgeladon.herokuapp.com/paletas",
-      "cescription": "API de produção"
+      "url": "https://api-elgeladonpetterson.onrender.com/paletas",
+      "cescription": "API de produção Render"
     }
   ],
   "paths": {
